@@ -49,10 +49,12 @@ services:
         ports:
             - "80:80"
     nodejs:
-        image: node:${NODE_VERSION:-20}-alpine
+        build:
+            context: docker/nodejs
+            args:
+                - NODE_VERSION:${NODE_VERSION:-20}
         user: ${DOCKER_USER:-1000:1000}
         working_dir: /srv/sylius
-        entrypoint: [ "/bin/sh","-c" ]
         command:
             - |
                 npm install

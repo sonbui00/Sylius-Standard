@@ -1,0 +1,11 @@
+#!/bin/sh
+set -e
+
+eval $( fixuid )
+
+if [ $# -eq 1 ]; then
+    # Use a subshell to execute the potentially multiline command
+    exec /bin/sh -c "$1"
+else
+    exec "$@"
+fi
